@@ -1,4 +1,4 @@
-package net.topikachu.auth0.v1.signUp;
+package net.topikachu.auth0.v1.signUp.vo;
 
 /**
  * Created by 禕 on 2016/11/27.

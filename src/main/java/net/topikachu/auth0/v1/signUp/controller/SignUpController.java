@@ -1,5 +1,9 @@
-package net.topikachu.auth0.v1.signUp;
+package net.topikachu.auth0.v1.signUp.controller;
 
+import net.topikachu.auth0.v1.signUp.service.SignUpService;
+import net.topikachu.auth0.v1.signUp.vo.Auth0Payload;
+import net.topikachu.auth0.v1.signUp.vo.Auth0Response;
+import net.topikachu.auth0.v1.signUp.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

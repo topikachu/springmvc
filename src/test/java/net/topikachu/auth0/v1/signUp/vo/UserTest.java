@@ -1,6 +1,7 @@
-package net.topikachu.auth0.v1.signUp;
+package net.topikachu.auth0.v1.signUp.vo;
 
 
+import net.topikachu.auth0.v1.signUp.vo.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

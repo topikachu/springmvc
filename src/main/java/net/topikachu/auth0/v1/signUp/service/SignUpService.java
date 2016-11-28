@@ -1,5 +1,7 @@
-package net.topikachu.auth0.v1.signUp;
+package net.topikachu.auth0.v1.signUp.service;
 
+import net.topikachu.auth0.v1.signUp.vo.Auth0Payload;
+import net.topikachu.auth0.v1.signUp.vo.Auth0Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

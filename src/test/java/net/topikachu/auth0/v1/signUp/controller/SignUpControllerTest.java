@@ -1,20 +1,19 @@
-package net.topikachu.auth0.v1.signUp;
+package net.topikachu.auth0.v1.signUp.controller;
 
+import net.topikachu.auth0.v1.signUp.controller.SignUpController;
+import net.topikachu.auth0.v1.signUp.service.SignUpService;
+import net.topikachu.auth0.v1.signUp.vo.Auth0Payload;
+import net.topikachu.auth0.v1.signUp.vo.Auth0Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 
 import static org.mockito.BDDMockito.given;

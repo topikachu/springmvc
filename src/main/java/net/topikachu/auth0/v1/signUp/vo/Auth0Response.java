@@ -1,4 +1,4 @@
-package net.topikachu.auth0.v1.signUp;
+package net.topikachu.auth0.v1.signUp.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
