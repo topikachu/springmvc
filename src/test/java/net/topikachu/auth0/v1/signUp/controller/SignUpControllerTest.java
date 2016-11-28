@@ -4,6 +4,7 @@ import net.topikachu.auth0.v1.signUp.controller.SignUpController;
 import net.topikachu.auth0.v1.signUp.service.SignUpService;
 import net.topikachu.auth0.v1.signUp.vo.Auth0Payload;
 import net.topikachu.auth0.v1.signUp.vo.Auth0Response;
+import net.topikachu.auth0.v1.signUp.vo.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,15 +50,19 @@ public class SignUpControllerTest {
     public void singUp() throws Exception {
         Auth0Response auth0Response=new Auth0Response();
         auth0Response.setId("auth0id");
-        auth0Response.setEmail("sb@sw.com");
+        auth0Response.setEmail("sb1@sw.com");
         auth0Response.setEmailVerified(false);
-        given(signUpService.signUp(any(Auth0Payload.class))).willReturn(auth0Response);
-        String content = "{\n" +
-                "  \"email\": \"sb@sw.com\",\n" +
-                "  \"password\": \"password1\"\n" +
+        given(signUpService.signUp(any(User.class))).willReturn(auth0Response);
+        String requestContent = "{\n" +
+                "  \"email\": \"sb1@sw.com\",\n" +
+                "  \"password\": \"password11\"\n" +
                 "}";
-        this.mvc.perform(post("/api/v1/signUp").contentType(MediaType.APPLICATION_JSON).content(content).accept(MediaType.APPLICATION_JSON))
+        String responseContent = "{\n" +
+                "  \"email\": \"sb1@sw.com\"\n" +
+
+                "}";
+        this.mvc.perform(post("/api/v1/signUp").contentType(MediaType.APPLICATION_JSON).content(requestContent).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(content));
+                .andExpect(content().json(responseContent));
     }
 }

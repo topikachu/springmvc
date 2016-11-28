@@ -20,15 +20,13 @@ public class SignUpController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<User> post(@RequestBody User user) {
 
-        Auth0Payload auth0Payload=new Auth0Payload();
-        auth0Payload.setClientId("yr8NgRgjqlvsRQzUktsA1aq11C4jF2la");
-        auth0Payload.setEmail("yi.gong@hpe.com");
-        auth0Payload.setPassword("password1");
-        auth0Payload.setConnection("Username-Password-Authentication");
 
-        Auth0Response response= signUpService.signUp(auth0Payload);
-        user.setId(response.getId());
-        return ResponseEntity.ok(user);
+
+        Auth0Response response= signUpService.signUp(user);
+        User responseUser=new User();
+        responseUser.setId(response.getId());
+        responseUser.setEmail(response.getEmail());
+        return ResponseEntity.ok(responseUser);
 
     }
 

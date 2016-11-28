@@ -1,8 +1,9 @@
 package net.topikachu.auth0.v1.signUp.service;
 
 import com.google.common.io.ByteStreams;
-import net.topikachu.auth0.v1.signUp.vo.Auth0Payload;
+import net.topikachu.auth0.v1.signUp.exception.UserExistsException;
 import net.topikachu.auth0.v1.signUp.vo.Auth0Response;
+import net.topikachu.auth0.v1.signUp.vo.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,7 @@ import java.io.InputStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withBadRequest;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
@@ -44,13 +46,31 @@ public class SignUpServiceTest {
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withSuccess(getClassPathResource("auth0Response.json"),
                         MediaType.APPLICATION_JSON));
-        Auth0Payload auth0Payload=new Auth0Payload();
-        auth0Payload.setClientId("clientId1");
-        auth0Payload.setEmail("sb@sw.com");
-        auth0Payload.setPassword("password1");
-        Auth0Response response = signUpService.signUp(auth0Payload);
+
+        User user=new User();
+        user.setEmail("sb@sw.com");
+        user.setPassword("password1");
+        Auth0Response response = signUpService.signUp(user);
         assertThat(response.getEmail()).isEqualTo("sb@sw.com");
         assertThat(response.getId()).isEqualTo("583bad4d850fdd9b633b5f01");
+    }
+
+
+    @Test(expected = UserExistsException.class)
+    public void signUpUserExists() throws Exception {
+        this.server.expect(requestTo("https://gongyi.auth0.com/dbconnections/signup"))
+                .andExpect(method(HttpMethod.POST))
+                .andRespond(
+                        withBadRequest()
+                                .body(getClassPathResource("auth0ResponseUserExists.json"))
+                                .contentType( MediaType.APPLICATION_JSON)
+                      );
+
+        User user=new User();
+        user.setEmail("sb@sw.com");
+        user.setPassword("password1");
+        Auth0Response response = signUpService.signUp(user);
+
     }
 
     private byte[] getClassPathResource(String s) throws IOException {
