@@ -1,4 +1,4 @@
-package net.topikachu.auth0.v1.signon;
+package net.topikachu.auth0.v1.signUp;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,7 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,8 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by 禕 on 2016/11/27.
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(SignOnController.class)
-public class SignOnControllerTest {
+@WebMvcTest(SignUpController.class)
+public class SignUpControllerTest {
 
     // @Autowired
     private MockMvc mvc;
@@ -47,13 +48,12 @@ public class SignOnControllerTest {
     }
 
     @Test
-    public void getUser() throws Exception {
+    public void singUp() throws Exception {
         String content = "{\n" +
                 "  \"email\": \"sb@sw.com\",\n" +
-                "  \"password\": null,\n" +
-                "  \"id\": \"id1\"\n" +
+                "  \"password\": \"password1\"\n" +
                 "}";
-        this.mvc.perform(get("/api/v1/signOn/id1").accept(MediaType.APPLICATION_JSON))
+        this.mvc.perform(post("/api/v1/signUp").contentType(MediaType.APPLICATION_JSON).content(content).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(content));
     }

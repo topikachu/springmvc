@@ -1,4 +1,4 @@
-package net.topikachu.auth0.v1.signon;
+package net.topikachu.auth0.v1.signUp;
 
 
 import org.junit.Before;
