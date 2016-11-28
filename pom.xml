@@ -127,9 +127,7 @@
             <properties>
                 <packaging.type>jar</packaging.type>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+
         </profile>
         <profile>
             <id>war</id>
@@ -143,6 +141,9 @@
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
 
